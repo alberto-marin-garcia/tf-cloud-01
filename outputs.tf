@@ -1,6 +1,6 @@
 output "public_ip" {
   description = "Public IP of instance"
-  value       = aws_instance.server1.public_ip
+  value       = aws_instance.server1[0].public_ip
 }
 
 # output "key_name" {
@@ -10,7 +10,7 @@ output "public_ip" {
 
 output "ami" {
   description = "AMI of instance"
-  value       = aws_instance.server1.ami
+  value       = aws_instance.server1[0].ami
 }
 
 # output "instance_stuff" {
@@ -20,7 +20,7 @@ output "ami" {
 
 output "instance_id" {
   description = "Id of instance"
-  value       = aws_instance.server1.id
+  value       = aws_instance.server1[0].id
 }
 
 

@@ -6,13 +6,11 @@ data "aws_vpc" "def_vpc" {
 }
 
 
-data "aws_availability_zones" "azs_availables" {
-  state = "available"
-}
-
-resource "aws_subnet" "subnet_amg" {
-  vpc_id = data.aws_vpc.def_vpc.id
-  #availability_zone = data.aws_availability_zones.azs_availables.names[0]  
+data "aws_subnets" "def_vpc_subnets" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.def_vpc.id]
+  }
 }
 
 resource "aws_security_group" "sec_web" {
