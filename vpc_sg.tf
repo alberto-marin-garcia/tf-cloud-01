@@ -5,13 +5,14 @@ data "aws_vpc" "def_vpc" {
   default = true
 }
 
-# Subnet data source
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet
-data "aws_subnets" "def_vpc_subnets" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.def_vpc.id]
-  }
+
+data "aws_availability_zones" "azs_availables" {
+  state = "available"
+}
+
+resource "aws_subnet" "subnet_amg" {
+  vpc_id = data.aws_vpc.def_vpc.id
+  #availability_zone = data.aws_availability_zones.azs_availables.names[0]  
 }
 
 resource "aws_security_group" "sec_web" {
